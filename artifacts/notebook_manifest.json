@@ -1,0 +1,85 @@
+{
+  "executed_at": "2026-10-17T14:36:18.837406+00:00",
+  "source_sha256": "9c16594e20c9f036103f3ca8e91bfe53ac9a4ea0aaf3e81297a784fadce9b34d",
+  "data_sha256": "6ce974df424ab9faf186f766a8fd93468ce7597767cb0df173889dcb3d2da928",
+  "notebook": "king_county_house_price_project.ipynb",
+  "plots": [
+    {
+      "id": "14-1",
+      "title": "2. Detect IQR outliers in key numeric columns",
+      "src": "/assets/notebook/cell-14-1.png",
+      "cell": 14,
+      "insight": "**Insight.** IQR flags unusually large homes, lots, and prices. These are plausible market observations, so the pipeline retains them and reduces their influence with robust scaling and a log target."
+    },
+    {
+      "id": "17-0",
+      "title": "2. Visualize the price distribution before and after log transformation",
+      "src": "/assets/notebook/cell-17-0.png",
+      "cell": 17,
+      "insight": "**Insight.** The log transformation reduces the long high-price tail. Models use log price, then return predictions to the original price scale for evaluation."
+    },
+    {
+      "id": "20-0",
+      "title": "2. Plot the price boxplot",
+      "src": "/assets/notebook/cell-20-0.png",
+      "cell": 20,
+      "insight": "**Insight.** The long upper tail represents valid luxury sales. Removing them would make the model less useful for the complete market."
+    },
+    {
+      "id": "23-0",
+      "title": "2. Plot living-area features against price",
+      "src": "/assets/notebook/cell-23-0.png",
+      "cell": 23,
+      "insight": "**Insight.** Living area should show a strong positive relationship with price. Total living area is used as the primary size feature."
+    },
+    {
+      "id": "26-0",
+      "title": "2. Compare category features with price",
+      "src": "/assets/notebook/cell-26-0.png",
+      "cell": 26,
+      "insight": "**Insight.** Grade, view, and waterfront status can separate price levels. Bedrooms are useful, but total area and quality provide more complete information."
+    },
+    {
+      "id": "29-0",
+      "title": "2. Plot the correlation heatmap",
+      "src": "/assets/notebook/cell-29-0.png",
+      "cell": 29,
+      "insight": "**Insight.** The heatmap identifies useful price relationships and redundant size variables. It supports the later correlation and VIF feature-selection step."
+    },
+    {
+      "id": "32-0",
+      "title": "2. Plot numeric feature histograms",
+      "src": "/assets/notebook/cell-32-0.png",
+      "cell": 32,
+      "insight": "**Insight.** Several size variables are right-skewed. RobustScaler uses medians and interquartile ranges, so it is less affected by extreme values."
+    },
+    {
+      "id": "35-0",
+      "title": "2. Map home prices by latitude and longitude",
+      "src": "/assets/notebook/cell-35-0.png",
+      "cell": 35,
+      "insight": "**Insight.** Price clusters geographically, which supports using location as a model input. Zip code is encoded categorically rather than treated as an ordered number."
+    },
+    {
+      "id": "38-0",
+      "title": "2. Compare average price by zip code, year built, and sale month",
+      "src": "/assets/notebook/cell-38-0.png",
+      "cell": 38,
+      "insight": "**Insight.** Location is strongly associated with average price. Year-built and sale-month patterns are descriptive, not proof of causal effects."
+    },
+    {
+      "id": "75-0",
+      "title": "10. Plot actual versus predicted values and residuals",
+      "src": "/assets/notebook/cell-75-0.png",
+      "cell": 75,
+      "insight": "**Insight.** Points close to the diagonal represent accurate predictions. Residuals should be centered around zero; wider spread at high prices is common for rare luxury homes."
+    },
+    {
+      "id": "78-0",
+      "title": "10. Plot feature importance for the best model",
+      "src": "/assets/notebook/cell-78-0.png",
+      "cell": 78,
+      "insight": "**Insight.** The feature-importance ranking is a model-based check on the EDA. Important area, grade, and location inputs support the earlier findings."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+.packages
+.venv
+.git
+__pycache__
+publish
+*.log
+artifacts/jupyter
+artifacts/matplotlib
+artifacts/models.joblib
