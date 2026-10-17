@@ -3,7 +3,7 @@ const $=id=>document.getElementById(id);
 const money=v=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(v);
 const count=v=>new Intl.NumberFormat('en-US').format(v);
 const config={displaylogo:false,responsive:true,scrollZoom:false};
-let metadata,model,sales,chartRequest=0;
+let metadata,model,sales,chartRequest=0,mapRequest=0;
 const chartNames={distribution:'Price & log-price distributions',areas:'Living area relationships',categories:'Quality, views & rooms',correlation:'Correlation heatmap',histograms:'Numeric feature distributions',geography:'Sales geography',zipcodes:'Top 10 ZIP codes',year:'Build year & sale month',outliers:'Outlier boxplots',quality:'Missing values & data quality'};
 const figures=new Map();
 function fail(error){const el=$('app-error');el.hidden=false;el.textContent='Could not load the dashboard. Please refresh the page. '+error.message;console.error(error);}
@@ -52,10 +52,14 @@ function estimate(){
   }catch(error){$('validation').textContent=error.message;}
 }
 async function drawMap(row){
-  const sample=sales.filter((_,i)=>i%12===0);
-  const traces=[{type:'scattermap',lat:sample.map(s=>s[5]),lon:sample.map(s=>s[6]),mode:'markers',marker:{size:6,color:'#4b91ff',opacity:.55},text:sample.map(s=>money(s[0])+' · ZIP '+s[4]),hovertemplate:'%{text}<extra>Historical sale</extra>',name:'Historical sales'},{type:'scattermap',lat:[row.lat],lon:[row.long],mode:'markers',marker:{size:20,color:'#f4d35e'},hovertemplate:'Your property<extra></extra>',name:'Your property'}];
-  const layout={height:420,autosize:true,margin:{l:0,r:0,t:0,b:0},paper_bgcolor:'rgba(0,0,0,0)',showlegend:false,map:{style:'carto-darkmatter',center:{lat:row.lat,lon:row.long},zoom:8.7}};
-  await Plotly.react('property-map',traces,layout,config);
+  const request=++mapRequest,figure=await chartFigure('property-map');
+  if(request!==mapRequest)return;
+  // Reuse the original Dash figure, including its seeded 1,800-sale sample,
+  // price colors, hover fields, typography, and dark hover background.
+  const marker=figure.data[figure.data.length-1];
+  marker.lat=[row.lat];marker.lon=[row.long];
+  figure.layout.map.center={lat:row.lat,lon:row.long};
+  await Plotly.react('property-map',figure.data,{...figure.layout,autosize:true},config);
 }
 function notebookPlot(){
   const p=metadata.manifest.plots.find(p=>p.id===$('notebook-plot').value);
