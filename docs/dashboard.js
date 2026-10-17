@@ -7,7 +7,7 @@ let metadata,model,sales,chartRequest=0,mapRequest=0;
 const chartNames={distribution:'Price & log-price distributions',areas:'Living area relationships',categories:'Quality, views & rooms',correlation:'Correlation heatmap',histograms:'Numeric feature distributions',geography:'Sales geography',zipcodes:'Top 10 ZIP codes',year:'Build year & sale month',outliers:'Outlier boxplots',quality:'Missing values & data quality'};
 const figures=new Map();
 function fail(error){const el=$('app-error');el.hidden=false;el.textContent='Could not load the dashboard. Please refresh the page. '+error.message;console.error(error);}
-async function fetchJSON(path){const response=await fetch(path);if(!response.ok)throw new Error('Loading '+path+' failed ('+response.status+').');return response.json();}
+async function fetchJSON(path){const response=await fetch(path+'?v=20261017-map3');if(!response.ok)throw new Error('Loading '+path+' failed ('+response.status+').');return response.json();}
 function addOption(select,value,text){const option=document.createElement('option');option.value=value;option.textContent=text;select.append(option);}
 function makeTable(target,rows,columns){
   const table=document.createElement('table'),head=document.createElement('thead'),tr=document.createElement('tr');
