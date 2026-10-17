@@ -1,4 +1,12 @@
-# DEPI public dashboard
+# DEPI House Dashboard
+
+**Public website:** https://omarwolf28.github.io/depi-house-dashboard/
+
+The free GitHub Pages version in `docs/` runs XGBoost predictions directly in the visitor's browser. It includes the original notebook's 11 plots, interactive market analysis, a property map, nearby sales, and model diagnostics. The browser evaluator reproduces the notebook pipeline's imputation, robust scaling, ZIP encoding, sparse feature handling, and all 300 fitted trees. Validation against all 4,323 held-out homes produced exactly the same predictions as the Python model.
+
+GitHub Pages publishes `main` → `/docs`. Visitors need no account or payment card. No server needs to stay running. Map tiles still require an internet connection. Market charts describe all cleaned sales; the original notebook gallery retains its source plots.
+
+The original Python Dash application is retained in the repository root. The instructions below apply only if deploying that Python version on a separate host.
 
 This package hosts the real Python Dash application, original notebook plots, and the notebook's fitted XGBoost model. Training is not performed on the web server.
 
